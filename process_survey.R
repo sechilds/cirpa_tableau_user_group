@@ -4,7 +4,9 @@ library(labelled)
 
 survey <- read_sav('~/Downloads/CIRPA Tableau User Group_October 23, 2018_05.58.sav')
 
-question_data <- var_label(survey)
+survey_questions_only <- survey[18:ncol(survey)]
+
+question_data <- var_label(survey_questions_only)
 questions <- tibble(field_name = names(question_data),
                     question_text = question_data)
 
@@ -12,12 +14,11 @@ questions <- questions %>%
   unnest(question_text) %>%
   mutate(question_number = 1:n())
 
-response_data <- survey[18:ncol(survey)]
-response_data %>%
+survey_questions_only %>%
   mutate_all(to_character) %>%
   mutate(respondent_id = 1:n()) %>%
   gather(field_name, label, -respondent_id) -> response_label
-response_data %>%
+survey_questions_only %>%
   mutate(respondent_id = 1:n()) %>%
   gather(field_name, response, -respondent_id) -> response
 response %>%
