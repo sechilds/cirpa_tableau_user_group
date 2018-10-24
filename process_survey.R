@@ -4,7 +4,7 @@ library(labelled)
 
 source('bad_word_list.R')
 
-survey <- read_sav('~/Downloads/CIRPA Tableau User Group_October 23, 2018_08.50.sav')
+survey <- read_sav('~/Downloads/CIRPA Tableau User Group_October 23, 2018_16.30.sav')
 
 survey_questions_only <- survey[18:ncol(survey)]
 
